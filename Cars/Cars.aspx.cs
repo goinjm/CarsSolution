@@ -16,32 +16,46 @@ namespace Cars
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            
-            if (ddlCars.Items.FindByValue(txtMake.Text + " - " + txtModel.Text + " - " + txtYear.Text) != null)
+
+            //confirm item present; add if it isn't
+            string text = string.Format("{0}|{1}|{2}",
+                    txtMake.Text.PadRight(15, '\u00A0'),
+                    txtModel.Text.PadRight(15, '\u00A0'),
+                    txtYear.Text.PadRight(15, '\u00A0'));
+
+            if (ddlCars.Items.FindByText(text) != null)
             {
                 
             }
             else
             {
-                //ddlCars.Items.Add(txtMake.Text + " - " + txtModel.Text + " - " + txtYear.Text);
-                string text = string.Format("{0}|{1}|{2}",
-                    txtMake.Text.PadRight(15, '\u00A0'),
-                    txtModel.Text.PadRight(15, '\u00A0'),
-                    txtYear.Text.PadRight(15, '\u00A0'));
                 ddlCars.Items.Add(text);
             }
-            
-            
+            ddlCars.SelectedValue = text;
+
         }
 
-        protected void Cars_OnTextChanged(object sender, EventArgs e)
+        protected void ddlCars_IndexChanged(object sender, EventArgs e)
         {
             string[] words = ddlCars.Text.Split('|');
+            int i = 1;
             foreach (string word in words)
             {
-                txtMake.Text = word;
-                txtModel.Text = word;
-                txtYear.Text = word;
+                switch (i)
+                {
+                    case 1:
+                        txtMake.Text = word;
+                        break;
+                    case 2:
+                        txtModel.Text = word;
+                        break;
+                    case 3:
+                        txtYear.Text = word;
+                        break;
+                    default:
+                        break;
+                }
+                i++;
             }
         }
     }

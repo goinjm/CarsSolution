@@ -16,7 +16,7 @@
         <asp:TextBox ID="txtYear" runat="server"></asp:TextBox>
         <div>
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="margin-bottom: 20px" Text="Add" />
-            <asp:DropDownList ID="ddlCars" runat="server" OnTextChanged="Cars_OnTextChanged"
+            <asp:DropDownList ID="ddlCars" runat="server" OnSelectedIndexChanged="ddlCars_IndexChanged" AutoPostBack="true"
                 style="font-family: 'Courier New', Courier, monospace">
             </asp:DropDownList>
         </div>
